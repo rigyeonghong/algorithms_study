@@ -1,19 +1,12 @@
+def to_days(date):
+    year, month, day = map(int, date.split("."))
+    return year * 28 * 12 + month * 28 + day
+
 def solution(today, terms, privacies):
-    answer = []
-    today_y, today_m, today_d = map(int,today.split("."))
-    today_day = (today_y * 12*28) + (today_m *28) + today_d
-    
-    new_term = {}
-    
-    for idx, term in enumerate(terms):
-        type, month = term.split()
-        new_term[type] = int(month) * 28
-    
-    for idx, privacy in enumerate(privacies):
-        collect_at, type = privacy.split()
-        collect_y, collect_m, collect_d = map(int, collect_at.split("."))
-        collect_day = (collect_y * 12*28) + (collect_m *28) + collect_d
-        if (today_day - collect_day) >= new_term[type]:
-            answer.append(idx+1)
-            
-    return answer
+    months = {v[0]: int(v[2:]) * 28 for v in terms}
+    today = to_days(today)
+    expire = [
+        i + 1 for i, privacy in enumerate(privacies)
+        if to_days(privacy[:-2]) + months[privacy[-1]] <= today
+    ]
+    return expire
