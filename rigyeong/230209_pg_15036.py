@@ -1,11 +1,10 @@
-values = ['' for _ in range(50 * 50)] # ''
+values = ['' for _ in range(50 * 50)]
 parent = [i for i in range(50 * 50)] 
 
 def find(x): 
     if x != parent[x]: 
         parent[x] = find(parent[x])
-        parent[19] = 512
-    return parent[x] # 512
+    return parent[x]
 
 
 def union(x1, x2):
