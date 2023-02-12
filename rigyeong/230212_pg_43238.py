@@ -14,5 +14,4 @@ def solution(n, times):
             right = mid -1 
         elif people < n:
             left = mid +1
-    
     return minutes
