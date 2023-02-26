@@ -23,3 +23,4 @@ def solution(orders, course):
                     answer.append(d)
 
     return sorted(answer)
+
