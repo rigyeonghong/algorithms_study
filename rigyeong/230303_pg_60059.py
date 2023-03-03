@@ -1,10 +1,8 @@
-# 시간 초과
-import copy
 def rotate(table):
     return list(map(list, zip(*table[::-1])))
 
 def is_correct(key, lock, x, y):
-    new_lock = copy.deepcopy(lock)
+    new_lock = [item[:] for item in lock] # 약 4배이상 빨라짐
     
     for i in range(x,x+len(key)):
         for j in range(y,y+len(key)):
@@ -27,6 +25,7 @@ def solution(key, lock):
         for j in range(N-M+1, N+N):
             new_lock[i][j] = lock[i-N][j-N]
     
+    # O(N^2) = 20 * 20 = 400
     for _ in range(4):
         key = rotate(key)
         for i in range(len(new_lock)):
