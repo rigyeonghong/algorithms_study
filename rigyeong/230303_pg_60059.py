@@ -4,6 +4,7 @@ def rotate(table):
 def is_correct(key, lock, x, y):
     new_lock = [item[:] for item in lock] # 약 4배이상 빨라짐
     
+    # 항상 len(key) < len(lock)
     for i in range(x,x+len(key)):
         for j in range(y,y+len(key)):
             if i < 0 or j < 0 or i >= len(lock) or j >= len(lock):
@@ -11,6 +12,8 @@ def is_correct(key, lock, x, y):
             else:
                 new_lock[i][j] += key[i-x][j-y]
     N = int(len(lock)/3)   
+
+    # O(N^2) = 20 * 20 = 400
     for i in range(N, N+N):
         for j in range(N, N+N):
             if new_lock[i][j] == 0 or new_lock[i][j] > 1:
@@ -35,4 +38,5 @@ def solution(key, lock):
     
     return answer
 
+# O(N^4) = 20^4 = 160000
 print(solution([[0, 0, 0], [1, 0, 0], [0, 1, 1]], [[1, 1, 1], [1, 1, 0], [1, 0, 1]]))
