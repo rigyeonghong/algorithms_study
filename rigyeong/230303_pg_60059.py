@@ -23,8 +23,8 @@ def solution(key, lock):
     answer = False
     M, N = len(key), len(lock)
     new_lock = [[0] *N*3 for _ in range(N*3)]
-    for i in range(N,N+N):
-        for j in range(N,N+N):
+    for i in range(N-M+1, N+N):
+        for j in range(N-M+1, N+N):
             new_lock[i][j] = lock[i-N][j-N]
     
     for _ in range(4):
